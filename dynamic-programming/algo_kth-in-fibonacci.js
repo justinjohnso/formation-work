@@ -18,3 +18,27 @@ function fibRecur(k){
 }
 
 console.log(fibRecur(276), fibArr)
+
+// -------------------------------
+function fibEasy(target) {
+    let a = 1
+        b = 0
+        temp
+
+    while (target >= 0) {
+        temp = a // save val a
+        a = a + b
+        b = temp
+        target--
+    }
+}
+
+function dynamicFib(target, hist) {
+    hist = hist || {} // create hist if it doesn't already exist
+
+    if (hist[target]) return hist[target] // if target is in hist, return
+    if (target <= 1) return 1 // base
+
+    // call recursively, save to hist
+    return hist[num] = dynamicFib(num - 1, hist) + dynamicFib(num - 2, hist)
+}
