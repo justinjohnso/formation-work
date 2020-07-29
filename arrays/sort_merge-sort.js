@@ -6,7 +6,7 @@
 // log(n) levels
 
 // splitting routine
-function mergeSort(arr) {
+function split(arr) {
     // if 0 or 1 items, return empty or that item
     if (arr.length <= 1) {
         return arr
@@ -17,7 +17,7 @@ function mergeSort(arr) {
     let left = arr.slice(0, mid)
     let right = arr.slice(mid)
     return merge(
-        mergeSort(left), mergeSort(right)
+        split(left), split(right)
     )
 }
 // merging routine
@@ -39,7 +39,8 @@ function merge(leftArr, rightArr) {
         }
     }
 
-    return resultArray
-        .concat(left.slice(leftIndex))
-        .concat(right.slice(rightIndex))
+    return res
+        // there will be one item left in either the left or the right arr
+        .concat(leftArr.slice(leftPointer))
+        .concat(rightArr.slice(rightPointer))
 }
