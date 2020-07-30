@@ -55,3 +55,22 @@
   
   // time complexity: O(n) => O(items * capacity) (row * col) 
   // space complexity: O(n) => O(items * capacity) (row * col)
+
+// ------------------------------------------
+// define weights, values, capacity
+function knapSack2(values, weights, capacity) {
+
+  let n = weights.length // keep track of length
+  let kp = [] // history arr
+
+  // fill rows
+  for (let i = 0; i < n; i++) { // items
+    kp[i] = []
+    for (let j = 0; j < capacity) { // capacities
+      kp[i][j] = 0
+    }
+  }
+
+  // check if result exists
+  for 
+}
