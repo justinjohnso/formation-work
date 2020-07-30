@@ -1,0 +1,3 @@
+[submodule "recur-web-a1"]
+	path = recur-web-a1
+	url = git@github.com:formation-dev/recur-web-a1.git
