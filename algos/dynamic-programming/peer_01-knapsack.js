@@ -57,20 +57,30 @@
   // space complexity: O(n) => O(items * capacity) (row * col)
 
 // ------------------------------------------
-// define weights, values, capacity
-function knapSack2(values, weights, capacity) {
-
-  let n = weights.length // keep track of length
-  let kp = [] // history arr
-
-  // fill rows
-  for (let i = 0; i < n; i++) { // items
-    kp[i] = []
-    for (let j = 0; j < capacity) { // capacities
-      kp[i][j] = 0
+function knapSack3(values, weights, capacity) {
+  let n = weights.length
+  let kp = new Array(n + 1).fill(new Array(capacity + 1).fill(0))
+  console.log(kp)
+  for (let i = 0; i <= n; i++) {
+    for (let j = 0; j<= capacity; j++) {
+      console.log(i, j)
+      if (kp[i][j]) { // if exists
+        break
+      }
+      if (i === 0 || j === 0) { // if 0
+        kp[i][j] = 0
+      } else if (weights[i - 1] > j) { // if weight > cap
+        kp[i][j] = kp[i - 1][j]
+      } else { // make choice
+        let withoutItem = kp[i - 1][j]
+        let withItem = kp[i - 1][j - weights[i - 1]] + values[i - 1]
+        kp[i][j] = Math.max(withoutItem, withItem)
+      }
     }
   }
-
-  // check if result exists
-  for 
+  console.log(kp)
+  return kp[n][capacity]
 }
+
+let test = knapSack3(values, weights, capacity)
+console.log(test)

@@ -85,3 +85,6 @@ function knapSackMem(n, W){
 }
 
 console.log(knapSackMem(n, W))
+
+// --------------------------------------------------
+
