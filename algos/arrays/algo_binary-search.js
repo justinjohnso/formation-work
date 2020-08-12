@@ -45,25 +45,22 @@ var search = function(nums, target) {
 
 // -------------------------------------------------------------------------
 
-function searchWrapper(arr, target) {
-    let lo = 0
-    let hi = arr.length - 1
+function bsRecur(arr, lo, hi, target) {
+    if (hi >= low) {
+        let mid = (hi + lo) / 2
 
-    return searchRecur(lo, hi, arr, target)
+        if (target === arr[mid]) {
+            return target
+        } else if (target < arr[mid]) {
+            return bsRecur(arr, lo, mid - 1, target)
+        } else {
+            return bsRecur(arr, mid + 1, hi, target)
+        }
+    }
+
+    return -1
 }
 
-function searchRecur(lo, hi, arr, target) {
-    console.log(lo, hi, target)
-    if (lo > hi) return false
-    let mid = Math.floor((lo + hi) / 2)
 
-    if (arr[mid] === target) return true
-
-    return (
-        searchRecur(lo, mid - 1, arr, target), // left
-        searchRecur(mid + 1, hi, arr, target) // right
-    )
-}
-
-let test = searchWrapper([-10,-3,0,5,7,9,12,25,82], -3)
-console.log(test)
+// let test = searchWrapper([-10,-3,0,5,7,9,12,25,82], -3)
+// console.log(test)

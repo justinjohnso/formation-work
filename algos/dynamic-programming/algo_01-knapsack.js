@@ -135,3 +135,19 @@ function ksRecur2(wt, val, C, n) {
 }
 
 console.log(ksRecur2(wt, val, C, n))
+
+// ---------------------------
+let kp = new Array(n + 1).fill(new Array(C + 1).fill(0))
+
+function knapsack3(wts, vals, C, n = wts.length) {
+    if (n === 0 || C === 0) return 0
+    if (kp[n][C]) return kp[n][C]
+
+    if (n - 1 > C) { // too big, don't take
+        return kp[n][C] = knapsack3(wts, vals, C, n - 1)
+    } else { // pick one
+        let withoutItem = knapsack3(wts, vals, C, n - 1)
+        let withItem = vals[n - 1] + knapsack3(wts, vals, C - wt[n - 1], n - 1)
+        return kp[n][C] = Math.max(withItem, withoutItem)
+    }
+}
