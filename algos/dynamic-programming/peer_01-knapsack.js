@@ -84,3 +84,5 @@ function knapSack3(values, weights, capacity) {
 
 let test = knapSack3(values, weights, capacity)
 console.log(test)
+
+// -------------------

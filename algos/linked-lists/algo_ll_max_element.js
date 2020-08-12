@@ -28,8 +28,8 @@ let myList = new LinkedList;
 myList.add(4)
 myList.add(56)
 myList.add(1)
-myList.add(45)
-myList.add(321)
+myList.add(450)
+myList.add(70)
 // -----------------------------------------------------
 
 // iterative
@@ -63,5 +63,28 @@ function findMaxRecur(node, currMax){
     }
 }
 
-let test = findMaxRecurWrap(myList)
+// let test = findMaxRecurWrap(myList)
+// console.log(test)
+
+// -----------------
+function findMaxWrapper2(list) {
+    let head = list.head
+    return findMaxRecur2(head, 0)
+}
+
+// function findMaxRecur2(node, max) {
+//     let currMax = Math.max(node.value, max)
+//     if (!node.next) {
+//         return currMax
+//     } else {
+//         return findMaxRecur2(node.next, currMax)
+//     }
+// }
+
+function findMaxRecur2(node, max) {
+    if (!node) return max
+    return findMaxRecur2(node.next, Math.max(node.value, max))
+}
+
+let test = findMaxWrapper2(myList)
 console.log(test)

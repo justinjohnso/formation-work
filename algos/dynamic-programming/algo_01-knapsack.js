@@ -62,8 +62,8 @@ function knapSack2(n, W){
 
 // Memoization
 // Init an empty array
-let hist = [...Array(n)].map(e => Array(W).fill(0));
-console.log(hist[n-1])
+// let hist = [...Array(n)].map(e => Array(W).fill(0));
+// console.log(hist[n-1])
 function knapSackMem(n, W){
     // if (hist[n-1][W]) {
     //     return hist[n][W]
@@ -84,7 +84,33 @@ function knapSackMem(n, W){
     return res
 }
 
-console.log(knapSackMem(n, W))
+// console.log(knapSackMem(n, W))
 
 // --------------------------------------------------
+let val = [60, 100, 120] 
+let wt = [10, 20, 30] 
+let C = 50
 
+function ksWrap(wt, val, C) {
+    let n = wt.length
+    let hist = new Array(n + 1).fill(new Array(C + 1).fill(0))
+    ksRecur(n, C, hist)
+} 
+
+function ksRecur(n, C, hist) {
+    console.log(hist)
+    if (hist[n][C]) return hist[n][C] // check if in hist
+    if (n === 0 || C === 0) return 0 // base
+
+    if (wt[n] > C) { // can't choose if wt[n] is greater than capacity
+        return ksRecur(n - 1, C) // without item
+    } else {
+        let withoutItem = ksRecur(n - 1, C)
+        let withItem = ksRecur(val[n] + ksRecur(n - 1, C - wt[n - 1]))
+        return hist[n][C] = Math.max(withItem, withoutItem)
+    }
+
+}
+
+let test = ksWrap(wt, val, C)
+console.log(test)

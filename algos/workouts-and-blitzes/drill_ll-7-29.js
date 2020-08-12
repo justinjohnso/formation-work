@@ -1,124 +1,71 @@
-// insertion sort
-function insertionSort(arr) {
-  for (i = 0; i < arr.length; i++) {
-    let key = arr[i]; // find key
-    let j = i - 1; // set j
-    while (j >= 0 && arr[j] > key) {
-      // while j > key, swap
-      arr[j + 1] = j;
-      j = j - 1;
+// iterative count
+function count(head) {
+    if (!head) return 0
+
+    let curr = head
+    let count = 1
+    while (curr.next) {
+        curr = curr.next
+        count++
     }
-    arr[j + 1] = key;
-  }
-  return arr;
+
+    return count
 }
 
-// selection sort
-// scan and select
-function selectionSort(arr) {
-  for (i = 0; i < arr.length; i++) {
-    let min = i;
-    for (j = 0; j < arr.length; j++) {
-      if (arr[j] < arr[min]) {
-        min = j;
-      }
+// find max unsorted
+function findMax(head) {
+    if (!head) return 0
+
+    let curr = head
+    let max = curr.value
+
+    while (curr.next) {
+        if (curr.next.value > max) {
+            max = curr.next.value
+        }
+        curr = curr.next
     }
-    if (min !== i) {
-      let temp = arr[i];
-      arr[i] = arr[min];
-      arr[min] = temp;
-    }
-  }
+
+    return max
 }
 
-// merge sort
-// split then merge
-function mergeSort(arr) {
-  return split(arr);
-}
+// insert sorted recursive
+// function insert(node, valToInsert) {
+//     if (!node) {
+//         node = new Node(valToInsert)
+//     }
 
-function split(arr) {
-  if (arr.length <= 1) return arr; // base
+//     if (node.)
 
-  let mid = Math.floor(arr.length / 2);
-  let left = arr.slice(0, mid);
-  let right = arr.slice(mid, arr.length - 1);
+// }
 
-  return merge(split(left), split(right));
-}
+// find middle 1 pass (2 pointers)
+function findMid(head) {
+    if (!head) return
+    if (!head.next) return head
+    let point1 = head
+    let point2 = head
 
-function merge(left, right) {
-  let res = [];
-  // two pointers
-  let leftPointer = 0;
-  let rightPointer = 0;
-  while (leftPointer < left.length && rightPointer < right.length) {
-    if (left[leftPointer] < right[rightPointer]) {
-      res.push(left[leftPointer]);
-      leftPointer++;
-    } else {
-      res.push(right[rightPointer]);
-      rightPointer++;
-    }
-  }
-  return res.concat(left.slice(leftPointer)).concat(right.slice(rightPointer));
-}
-
-// binary tree height
-function findHeight(root) {
-  findHeightRecur(root, 1);
-}
-
-function findHeightRecur(node, currDepth) {
-  if (!node) return 0; // if null return 0
-  if (!node.left && !node.right) return currDepth; // if leaf return currDepth
-
-  if (node.left && node.right) {
-    return Math.max(
-      findHeightRecur(node.left, currDepth + 1),
-      findHeightRecur(node.right, currDepth + 1)
-    );
-  } else if (node.left) {
-    return findHeightRecur(node.left, currDepth + 1);
-  } else if (node.right) {
-    return findHeightRecur(node.right, currDepth + 1);
-  }
-}
-
-// bst find
-function bstFind(root, target) {
-  let stack = [root];
-  while (stack.length > 0) {
-    let curr = stack.pop();
-    if (curr.value === target) {
-      return true;
+    while (point2.next.next) {
+        point1 = point1.next
+        point2 = point2.next.next
     }
 
-    if (curr.left) {
-      stack.push(curr.left);
-    }
-    if (curr.right) {
-      stack.push(curr.right);
-    }
-  }
-  return false;
+    return point1
 }
 
-// bst insert
-function bstInsert(node, toBeInserted) {
-  if (toBeInserted <= node.value) {
-    // left
-    if (!node.left) {
-      node.left = new Node(toBeInserted);
-    } else {
-      bstInsert(node.left);
+// reverse
+function reverse(head) {
+    if (!head) return
+    if (!head.next) return head
+    let curr = head
+    let prev = curr
+    let temp
+
+    while (curr) {
+        temp = curr.next // save
+        curr.next = prev
+        prev = curr
+        curr = temp
     }
-  } else {
-    // right
-    if (!node.right) {
-      node.right = new Node(toBeInserted);
-    } else {
-      bstInsert(node.right);
-    }
-  }
 }

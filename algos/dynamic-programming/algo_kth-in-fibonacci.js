@@ -42,3 +42,14 @@ function dynamicFib(target, hist) {
     // call recursively, save to hist
     return hist[num] = dynamicFib(num - 1, hist) + dynamicFib(num - 2, hist)
 }
+
+// -----------------
+
+function fib(target, hist) {
+    let hist = hist || {}
+
+    if (hist[target]) return hist[target]
+    if (target <= 1) return 1
+    
+    return hist[target] = fib(target - 1, hist) + fib(target - 2, hist)
+}
