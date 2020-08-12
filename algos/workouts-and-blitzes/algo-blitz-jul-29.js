@@ -34,7 +34,7 @@ function countRecur(node, currCount) {
           min = j
         }
       }
-      for (min !== i) { // if min isn't i, swap
+      if (min !== i) { // if min isn't i, swap
         let temp = arr[i]
         arr[i] = arr[min]
         arr[min] = temp
@@ -53,7 +53,9 @@ function countRecur(node, currCount) {
     while (left <= right) {
       let mid = Math.floor((left + right)/2)
       if (target === nums[mid]) return mid
-    } else if (target > nums[mid]) {
+    } 
+    
+    if (target > nums[mid]) {
       left = mid + 1
     } else if (target < nums[mid]) {
       right = mid - 1
