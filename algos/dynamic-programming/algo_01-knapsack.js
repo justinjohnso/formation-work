@@ -5,10 +5,10 @@
 // val = item values
 // n = number of items
 
-let val = [60, 100, 120] 
-let wt = [10, 20, 30] 
-let W = 50
-let n = val.length
+// let val = [60, 100, 120] 
+// let wt = [10, 20, 30] 
+// let W = 50
+// let n = val.length
 
 function knapSack(W, wt, val, n){
     // base, if no items or no max weight, answer is 0
@@ -94,19 +94,18 @@ let C = 50
 function ksWrap(wt, val, C) {
     let n = wt.length
     let hist = new Array(n + 1).fill(new Array(C + 1).fill(0))
-    ksRecur(n, C, hist)
+    return ksRecur(n, C, hist)
 } 
 
 function ksRecur(n, C, hist) {
-    console.log(hist)
     if (hist[n][C]) return hist[n][C] // check if in hist
     if (n === 0 || C === 0) return 0 // base
 
-    if (wt[n] > C) { // can't choose if wt[n] is greater than capacity
-        return ksRecur(n - 1, C) // without item
+    if (wt[n - 1] > C) { // can't choose if wt[n] is greater than capacity
+        return ksRecur(n - 1, C, hist) // without item
     } else {
-        let withoutItem = ksRecur(n - 1, C)
-        let withItem = ksRecur(val[n] + ksRecur(n - 1, C - wt[n - 1]))
+        let withoutItem = ksRecur(n - 1, C, hist)
+        let withItem = val[n - 1] + ksRecur(n - 1, C - wt[n - 1], hist)
         return hist[n][C] = Math.max(withItem, withoutItem)
     }
 
@@ -114,3 +113,25 @@ function ksRecur(n, C, hist) {
 
 let test = ksWrap(wt, val, C)
 console.log(test)
+
+// --------------------------------------------------
+// let val = [60, 100, 120] 
+// let wt = [10, 20, 30] 
+// let C = 50
+// let n = wt.length
+
+let hist = new Array(n + 1).fill(new Array(C + 1).fill(0))
+
+function ksRecur2(wt, val, C, n) {
+    if (n === 0 || C === 0) return 0 // base
+    if (hist[n][C]) return hist[n][C] // check if in hist
+    if (wt[n - 1] > C) {
+        return hist[n][C] = ksRecur2(wt, val, C, n - 1) // without item
+    } else {
+        let withoutItem = ksRecur2(wt, val, C, n - 1)
+        let withItem = val[n - 1] + ksRecur2(wt, val, C - wt[n - 1], n - 1)
+        return hist[n][C] = Math.max(withItem, withoutItem)
+    }
+}
+
+console.log(ksRecur2(wt, val, C, n))
