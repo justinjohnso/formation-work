@@ -55,3 +55,35 @@ function findHeight(node) {
 
     return depth
 }
+
+// -------------------------------
+
+function btHeightRecur(node, maxDepth) {
+    let currDepth = maxDepth
+    if (!node.left && !node.right) {
+        return currDepth + 1
+    } else {
+        return Math.max(btHeightRecur(node.left, currDepth + 1), btHeightRecur(node.right, currDepth + 1))
+    }
+}
+
+function btHeightIter(root) {
+    let queue = [root]
+    let depth = 0
+
+    while (queue.length > 0) {
+        let currLevel = queue.length
+        for (let i = 0; i < currLevel; i++) { // for every item in current level
+            let curr = queue.shift() // current node
+            if (curr.left) {
+                queue.push(curr.left)
+            }
+            if (curr.right) {
+                queue.push(curr.right)
+            }
+        }
+        depth++ // add when you to the next level
+    };
+    
+    return depth
+}
