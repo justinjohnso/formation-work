@@ -118,6 +118,7 @@ function sumList(node = list.head, sum = list.head.value) { // it matters what's
 // Score: C
 
 // I fixed it!
+// [1, 2, 3, 6, 2, 2, 3, 5]
 function uniqueInArr(arr) {
     let hash = {}
     let count = 0
