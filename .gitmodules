@@ -2,3 +2,6 @@
 	path = recur-web-a1
 	url = git@github.com:formation-dev/recur-web-a1.git
 	ignore = all
+[submodule "live-coding-web"]
+	path = live-coding-web
+	url = git@github.com:formation-dev/live-coding-web.git
