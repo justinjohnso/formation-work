@@ -5,3 +5,4 @@
 [submodule "live-coding-web"]
 	path = live-coding-web
 	url = git@github.com:formation-dev/live-coding-web.git
+	ignore = all
