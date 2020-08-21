@@ -23,3 +23,25 @@ function countDupes(arr) {
 
 let test = countDupes([1, 2, 1, 2, 1])
 console.log(test)
+
+// ---------------------
+function dupesInArr(arr) {
+    let hash = {}
+    let count = 0
+
+    for (el of arr) {
+        if (hash[el] === 1) {
+            hash[el]++
+            count++
+        } else if (hash[el] > 1) {
+            continue
+        } else {
+            hash[el] = 1
+        }
+    }
+
+    return count
+}
+
+let test1 = dupesInArr([1, 2, 1, 2, 1])
+console.log(test1)

@@ -24,3 +24,18 @@ function uniqueCount(arr) {
 
 let test = uniqueCount([2016, 2017, 2017, 2016, 2019, 2018, 2019, "bob"])
 console.log(test)
+
+// ----------------
+function uniqueInArr(arr) {
+    let hash = {}
+
+    for (el of arr) {
+        if (hash[el]) {
+            continue
+        } else {
+            hash[el]
+        }
+    }
+
+    return Object.keys(hash).length
+}
