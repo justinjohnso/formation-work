@@ -9,3 +9,4 @@
 [submodule "recur-web-a2"]
 	path = recur-web-a2
 	url = git@github.com:formation-dev/recur-web-a2.git
+	ignore = all
