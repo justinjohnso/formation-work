@@ -53,3 +53,16 @@ function fib(target, hist) {
     
     return hist[target] = fib(target - 1, hist) + fib(target - 2, hist)
 }
+
+// ----------------------
+
+// fib last 3
+function fib(target, hist) {
+    let hist = hist || {} // create hist if doesn't already exist
+    if (hist[target]) return hist[target] // check
+    if (target <= 2) return 1 // if target index is of first 3, return
+    
+    return hist[target] = fib(target - 1, hist) + fib(target - 2, hist) + fib(target - 3, hist)
+  }
+  
+  

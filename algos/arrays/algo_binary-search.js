@@ -62,6 +62,6 @@ function bsRecur(arr, target, low = 0, high = arr.length - 1) {
 }
 
 let arr = [-10,-3,0,5,7,9,12,25,82]
-let test = bsRecur(arr, 12)
-// let test = search(arr, 0)
+// let test = bsRecur(arr, 12)
+let test = search(arr, 12)
 console.log(test)
