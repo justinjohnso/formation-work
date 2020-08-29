@@ -113,19 +113,22 @@ function arrayify(head) {
     return array
 }
 
-function remove(head, target) {
-//     let node = head
-//     while (node.next) {
-//       if (node.next.next !== null) {
-        
-//       }
-//     }
+function remove(node, target) {
+    // if (!node) return new ListNode(1)
+
+    // let prev = node
+    // let curr = prev.next
+
+    // if (prev.value === target) {
+    //     prev = curr
+    // }
     
-    return new ListNode(1)
+    // while (curr && curr.value !== target) {
+    //     curr = curr.next
+    // }
+
+    // if 
 }
-
-
-
 
 // Test Casees
 test.startProblem("1. Remove an Element")
@@ -164,7 +167,6 @@ test.endProblem()
 function findKthFromLast(head, k) {
     let slow = head
     let fast = head
-    let length = 1;
     
     while (fast && k >= 1) { // move fast k times
       fast = fast.next;
@@ -174,16 +176,14 @@ function findKthFromLast(head, k) {
     while (fast) {
       slow = slow.next;
       fast = fast.next;
-      length++;
     }
-    // console.log(slow.value, length)
-   
-    // if (length > k) return -1;
-    return slow.value;
+
+    if (k > 0) {
+        return -1
+    } else {
+        return slow.value
+    }
 }
-
-
-
 
 // Test Cases
 var LL5 = new ListNode(13, new ListNode(1, new ListNode(5, new ListNode(3, new ListNode(7, new ListNode(10))))))
@@ -191,7 +191,7 @@ test.startProblem("2. Find the Kth from the Last")
 test.test(10, findKthFromLast(LL5, 1), 1)
 test.test(3, findKthFromLast(LL5, 3), 2)
 test.test(13, findKthFromLast(LL5, 6), 3)
-test.test(-1,  findKthFromLast(LL5, 7), 4)
+test.test(-1, findKthFromLast(LL5, 7), 4)
 test.endProblem()
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -215,7 +215,14 @@ test.endProblem()
 // }
     
 function reverseLL(head) {
-    // Write your code here.
+    let node = head
+    let prev
+
+    while (node) {
+        [node.next, prev, node] = [prev, node, node.next]
+    }
+
+    return prev
 }
 
 
@@ -292,8 +299,21 @@ test.endProblem()
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function binarySearch(array, target) {
-    // Write your code here.
+function binarySearch(arr, target) {
+    let left = 0
+    let right = arr.length - 1
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2)
+        if (target === arr[mid]) {
+            return mid
+        } else if (target < arr[mid]) {
+            right = mid - 1
+        } else if (target > arr[mid]) {
+            left = mid + 1
+        }
+    }
+    return -1
 }
 
 
@@ -325,26 +345,30 @@ class TreeNode {
 }
         
 function countTreeNodesIterative(root) {
-//     let stack = [tree.root]
+    let stack = [root]
+    let count = 0
     
-//     while(stack.length > 0) {
-//       let curr = stack.pop()
-//       // console.log(curr)
-//       if (target === curr.value) {
-//         return true
-//       }
-//       if (curr.left) {
-//         stack.push(curr.left)
-//       }
-//       if (curr.right) {
-//         stack.push(curr.right)
-//       }
-//     }
-//   return false
+    while(stack.length > 0) {
+      let curr = stack.pop()
+      if (curr) {
+        if (curr.left) {
+            stack.push(curr.left)
+          }
+          if (curr.right) {
+            stack.push(curr.right)
+          }
+          count++
+      }
+    }
+  return count
 }
 
-function countTreeNodesRecursive(root) {
-    // Write your code here.
+function countTreeNodesRecursive(node) {
+    if (!node) {
+        return 0
+    } else {
+        return countTreeNodesRecursive(node.left) + countTreeNodesRecursive(node.right) + 1
+    }
 }
 
 
@@ -380,11 +404,26 @@ test.endProblem()
 // }
 
 function findHeight(root) {
-    // Write your code here.
+    let stack = [root]
+    let height = 0
+    
+    while (stack[0] && stack.length > 0) { 
+        let level = stack.length
+        for (i = 0; i < level; i++) {
+            let curr = stack.pop()
+            if (curr) {
+                if (curr.left) {
+                    stack.push(curr.left)
+                }
+                if (curr.right) {
+                    stack.push(curr.right)
+                }
+            }
+        }
+        height++
+    }
+    return height
 }
-
-
-
 
 // Test Cases
 test.startProblem("7. Find Height of a Tree")
@@ -413,28 +452,17 @@ test.endProblem()
 //     }
 // }
 
-function searchBST(root, target) {
-//     console.log(root)
-//     let stack = [tree.root]
-    
-//     while(stack.length > 0) {
-//       let curr = stack.pop()
-//       // console.log(curr)
-//       if (target === curr.value) {
-//         return true
-//       }
-//       if (curr.left) {
-//         stack.push(curr.left)
-//       }
-//       if (curr.right) {
-//         stack.push(curr.right)
-//       }
-//     }
-//   return false
+function searchBST(node, target) {
+    if (!node) return false
+
+    if (target === node.value) {
+        return true
+    } else if (target < node.value) {
+        return searchBST(node.left, target)
+    } else if (target > node.value) {
+        return searchBST(node.right, target)
+    }
 }
-
-
-
 
 // Test Cases
 test.startProblem("8. Search BST")
@@ -515,7 +543,7 @@ function fibonacci(n) {
 function fib(target, hist) {
   // console.log(hist)
   if (hist[target]) return hist[target]
-  if (target <= 1) return 1
+  if (target <= 1) return target
   
   return hist[target] = fib(target - 1, hist) + fib(target - 2, hist)
 }
