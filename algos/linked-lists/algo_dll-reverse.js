@@ -37,13 +37,17 @@ class Node {
     let node = head //set node to head //1
     
     while (node) { // 1, 2, 3, null
-      // [node.next, node.prev, head, node] = [node.prev, node.next, node, node.next]
-      let temp = node.next // 2, 3, null
-      node.next = node.prev // 2 -> null,  3 -> 1, null -> 2
-      node.prev = temp // null -> 2, 1 -> 3, 2 -> null
-      head = node // 1 -> 1, 2 -> 2, 3 -> 3
-      
-      node = temp // 1 -> 2 (move to node.next), 2 -> 3, null
+        // swap node.next and node.prev
+        // move head to curr node
+        // move curr node to node.next
+        [node.next, node.prev, head, node] = [node.prev, node.next, node, node.next]
+        
+        // let temp = node.next // 2, 3, null
+        // node.next = node.prev // 2 -> null,  3 -> 1, null -> 2
+        // node.prev = temp // null -> 2, 1 -> 3, 2 -> null
+        // head = node // 1 -> 1, 2 -> 2, 3 -> 3
+        
+        // node = temp // 1 -> 2 (move to node.next), 2 -> 3, null
     }
   
     return head.toString() //3->2->1->null
