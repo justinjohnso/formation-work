@@ -21,6 +21,7 @@ const P = new Pokedex.Pokedex();
 const ListPokemon = () => {
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [modifier, setModifier] = useState(10);
   const [currPokemon, setCurrPokemon] = useState();
   const [pokeList, setPokeList] = useState([]);
 
@@ -28,18 +29,19 @@ const ListPokemon = () => {
 
   const handleOpen = (name) => {
     P.getPokemonByName(name).then((res) => setCurrPokemon(res));
-    console.log(currPokemon);
+    // console.log(currPokemon);
     setOpen(true);
-    console.log(open)
+    // console.log(open)
   }
 
   const handleClose = () => {
     setOpen(false);
-    console.log(open)
+    setCurrPokemon(null)
+    // console.log(open)
   }
 
   const fetchAllPokemon = () =>
-    P.getPokemonsList({ limit: 151}).then(function (response) {
+    P.getPokemonsList().then(function (response) {
       setPokeList(response.results);
     });
 
@@ -67,14 +69,14 @@ const ListPokemon = () => {
         </>
       )
     } else {
-      return <DialogTitle>{'steve'}</DialogTitle>
+      return <DialogTitle>{'Loading...'}</DialogTitle>
     }
   }
 
   return (
     <>
       <List>
-        {pokeList.slice(offset, offset + 5).map((pokemon, index) => (
+        {pokeList.slice(offset, offset + modifier).map((pokemon, index) => (
           <ListItem key={pokemon.name}>
             <Button variant='outlined' fullWidth onClick={() => handleOpen(pokemon.name)}>
               <Box flexGrow={1}><Typography align='left'>{pokemon.name}</Typography></Box>
@@ -83,8 +85,8 @@ const ListPokemon = () => {
           </ListItem>
         ))}
       </List>
-      <Button variant="outlined" onClick={() => setOffset(offset > 0 ? offset - 5 : offset)}>Prev</Button>
-      <Button variant="outlined" onClick={() => setOffset(offset < 150 ? offset + 5 : offset)}>Next</Button>
+      <Button variant="outlined" onClick={() => setOffset(offset > 0 ? offset - modifier : offset)}>Prev</Button>
+      <Button variant="outlined" onClick={() => setOffset(offset < pokeList.length - (pokeList.length % modifier) ? offset + modifier : offset)}>Next</Button>
       
       <Dialog onClose={handleClose} open={open}>
         <PokemonDialog />
