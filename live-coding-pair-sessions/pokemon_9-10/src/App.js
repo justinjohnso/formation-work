@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
 import {
   List,
   ListItem,
@@ -12,8 +11,6 @@ import {
   Typography,
   Box
 } from "@material-ui/core/";
-
-// const useStyles = makeStyles(() => ({}));
 
 const Pokedex = require("pokeapi-js-wrapper");
 const P = new Pokedex.Pokedex();
@@ -29,15 +26,12 @@ const ListPokemon = () => {
 
   const handleOpen = (name) => {
     P.getPokemonByName(name).then((res) => setCurrPokemon(res));
-    // console.log(currPokemon);
     setOpen(true);
-    // console.log(open)
   }
 
   const handleClose = () => {
     setOpen(false);
     setCurrPokemon(null)
-    // console.log(open)
   }
 
   const fetchAllPokemon = () =>
@@ -99,7 +93,6 @@ const ListPokemon = () => {
 };
 
 export default function App() {
-  // const classes = useStyles();
   return (
     <>
       <Container maxWidth='sm'>
