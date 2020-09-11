@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Container,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  Typography,
-  Box
-} from "@material-ui/core/";
+import { List, ListItem, Container, Button, Dialog, DialogTitle, DialogActions, Typography, Box } from "@material-ui/core/";
 
 const Pokedex = require("pokeapi-js-wrapper");
 const P = new Pokedex.Pokedex();
@@ -18,7 +7,7 @@ const P = new Pokedex.Pokedex();
 const ListPokemon = () => {
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
-  const [modifier, setModifier] = useState(10);
+  const [modifier] = useState(10);
   const [currPokemon, setCurrPokemon] = useState();
   const [pokeList, setPokeList] = useState([]);
 
@@ -51,7 +40,7 @@ const ListPokemon = () => {
       let wt = currPokemon.weight
       return (
         <>
-          <img src={sprite} /><DialogTitle>{name}</DialogTitle>
+          <img src={sprite} alt='' /><DialogTitle>{name}</DialogTitle>
           <List>
               <ListItem><Typography>HP: {hp}</Typography></ListItem>
               <ListItem><Typography>Defense: {def}</Typography></ListItem>
