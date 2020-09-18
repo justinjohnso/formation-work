@@ -1,26 +1,18 @@
-test = "abaxyzzyxf"
+// Brute force - O(n^3)
+// Generate all substrings of the string (O(n^2)), then check if palindrome and keep track of largest
+
+function expandAroundCenter(str) {
+
+}
+
+const test = "abaxyzzyxf"
+console.log(expandAroundCenter(test))
 // output: "xyzzyx"
 
-// function longestPalindromicSubstring(string) {
-//     let arr = string.split('')
-//     let longest = 1
-//     let hash = {}
+// function backTrack(str) {
 
-//     for (i in arr) {
-//         let char = arr[i]
-//         if (hash[char]) {
-//             // get string, check if palindrome
-//             let subStr = arr.slice(arr[hash[char]], arr[i])
-//             if (subStr === subStr.reverse()) {
-//                 longest = Math.max(longest, subStr.length)
-//             }
-//         }
-//         hash[char] = [i]
-//         console.log(hash)
-//     }
-
-//     return longest
 // }
 
-// console.log(longestPalindromicSubstring(test))
-  
+// const test = "abaxyzzyxf"
+// console.log(backTrack(test))
+// output: "xyzzyx"
