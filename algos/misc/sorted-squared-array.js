@@ -29,5 +29,5 @@ function sortedSquaredArr(arr) {
     return output
 }
 
-const test = [-6, -4, 1, 2, 3, 5]
+const test = [-6, -4, 1, 2, 3, 5] // => [1, 4, 9, 16, 25, 36]
 console.log(sortedSquaredArr(test))

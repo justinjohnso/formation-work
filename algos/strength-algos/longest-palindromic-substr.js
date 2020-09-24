@@ -8,6 +8,7 @@ function longestPalindrome(str) {
     // we'll adjust these based on the palindromes we find while looping
     let start = 0
     let end = 0
+    // let longest = [0, 1]
 
     for (i in str) {
         let len1 = expandAroundCenter(str, i, i) // middle 1 char
@@ -38,14 +39,9 @@ function expandAroundCenter(str, left, right) {
 
 }
 
-const test = "abaxyzzyxf"
+const test = "racecar"
 console.log(longestPalindrome(test))
-// output: "xyzzyx"
 
-// function backTrack(str) {
-
-// }
-
-// const test = "abaxyzzyxf"
-// console.log(backTrack(test))
-// output: "xyzzyx"
+// abba
+// racecar
+// aaabccxyyxcsua
