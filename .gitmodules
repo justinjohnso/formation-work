@@ -10,11 +10,3 @@
 	path = recur-web-a2
 	url = git@github.com:formation-dev/recur-web-a2.git
 	ignore = all
-[submodule "coding-challenges/hierarchical-sorting"]
-	path = coding-challenges/hierarchical-sorting
-	url = git@gist.github.com:3c8b21f4ffe92e1af299.git
-	ignore = all
-[submodule "coding-challenges/ant-honeycomb"]
-	path = coding-challenges/ant-honeycomb
-	url = git@github.com:Mogady/Astar-search-hexgrid.git
-	ignore = all
