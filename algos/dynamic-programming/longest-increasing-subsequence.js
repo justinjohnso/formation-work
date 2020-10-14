@@ -35,32 +35,18 @@ function dynamicSubsequence(arr) {
 
 // ------------------------------------------
 let input = [10, 9, 2, 5, 3, 7, 101, 18]; // output -> 4 || [2,3,7,101]
+let strInput = input.join(", ");
 // find subproblems
 // include, exclude
-// at each step we can ask: can arr[j] extend the lcs of arr[i]?
+// at each step we can ask: can arr[j] extend the lis of arr[i]?
 //      if yes - take the max of:
 //          include -> dp[j] + 1
 //          exclude -> dp[i]
 //      if no - move on, increase i
-// - - -
-// Return subsequence
-const lcsArr = (arr) => {
-  // let dp = new Array(arr.length).fill(1);
-  // for (let j = 1; j < arr.length; j++) {
-  //   // outer loop
-  //   for (let i = 0; i < j; i++) {
-  //     // inner loop comparing dp[i]
-  //     if (arr[i] < arr[j]) {
-  //       let exclude = dp[i];
-  //       let include = dp[j] + 1;
-  //       dp[j] = Math.max(include, exclude);
-  //     }
-  //   }
-  // }
-};
+
 // - - -
 // Return length
-const lcsLength = (arr) => {
+const lisLength = (arr) => {
   let dp = new Array(arr.length).fill(1);
 
   for (let j = 1; j < arr.length; j++) {
@@ -68,29 +54,88 @@ const lcsLength = (arr) => {
     for (let i = 0; i < j; i++) {
       // inner loop comparing dp[i]
       if (arr[i] < arr[j]) {
-        // can we increase the lcs of arr[i] using arr[j]?
+        // can we increase the lis of arr[i] using arr[j]?
         let exclude = dp[j]; // take j
         let include = dp[i] + 1;
         dp[j] = Math.max(include, exclude);
       }
-      // console.log(i, [dp[i]], j, [dp[j]]);
     }
   }
 
   return dp[dp.length - 1];
 };
-console.log(lcsLength(input));
+// console.log(lisLength(input));
+
+// - - -
+// Return subsequence
+const lisArr = (arr) => {
+  let dp = Array.from(arr, (el) => [el]);
+  let longest = dp[0];
+  for (let j = 1; j < arr.length; j++) {
+    // outer loop
+    for (let i = 0; i < j; i++) {
+      // inner loop comparing dp[i]
+      if (arr[i] < arr[j]) {
+        let exclude = [arr[j]];
+        let include = dp[i].concat([arr[j]]);
+        include.length > exclude.length ? (dp[j] = include) : (dp[j] = exclude);
+      }
+      if (dp[j].length > longest.length) {
+        longest = dp[j];
+      }
+    }
+  }
+
+  return longest;
+};
+// console.log(lisArr(input));
+
 // - - -
 // Return substr
-const lcsStr = (str) => {
-  let res = "";
+const lisStr = (str) => {
+  let arr = str.split(", ").map((el) => Number(el));
+  let dp = Array.from(arr, (el) => [el]);
+  let longest = dp[0];
+  for (let j = 1; j < arr.length; j++) {
+    // outer loop
+    for (let i = 0; i < j; i++) {
+      // inner loop comparing dp[i]
+      if (arr[i] < arr[j]) {
+        let exclude = [arr[j]];
+        let include = dp[i].concat([arr[j]]);
+        include.length > exclude.length ? (dp[j] = include) : (dp[j] = exclude);
+      }
+      if (dp[j].length > longest.length) {
+        longest = dp[j];
+      }
+    }
+  }
 
-  return res;
+  return longest.join(", ");
 };
+// console.log(lisStr(strInput));
+
 // - - -
 // Return consecutive subsequence
-const lcsConsecutive = (arr) => {
-  let res = "";
+const lisConsecutive = (arr) => {
+  let dp = Array.from(arr, (el) => [el]);
+  let longest = dp[0];
+  for (let j = 1; j < arr.length; j++) {
+    // outer loop
+    for (let i = 0; i < j; i++) {
+      // inner loop comparing dp[i]
+      if (arr[i] === arr[j] - 1) {
+        let exclude = [arr[j]];
+        let include = dp[i].concat([arr[j]]);
+        include.length > exclude.length ? (dp[j] = include) : (dp[j] = exclude);
+      }
+      if (dp[j].length > longest.length) {
+        longest = dp[j];
+      }
+      console.log(i, dp[i], j, dp[j]);
+    }
+  }
 
-  return res;
+  return longest;
 };
+// console.log(lisConsecutive(input));
