@@ -1,0 +1,55 @@
+One possible solution: https://github.com/RickSayd/navigating-system-design/blob/master/designs/facebook-messenger.md
+
+Design Google Hangouts
+
+Users - connected to other users
+Messages
+Two way communication
+Both 1:1 chats and group messages
+Out of Scope
+Uploading Media
+Audio/Video Chat
+
+User many threads, thread many users
+Thread many messages
+
+Users Table
+userID
+name
+picture
+contacts (reference to other userIDs)
+
+Connections
+userId1
+UserId2
+
+Threads
+threadID
+name
+metadata
+
+// users -> list of userIDs(fk)
+// messages -> list of messageIDs
+
+UserThread
+threadId fk
+userId fk
+
+Messages
+messageID
+userID(fk)
+threadID(fk)
+content (string)
+
+---------------
+addContact(userID1, userID2)
+startThread([userIDs]) -> threadID
+
+sendMessage(threadID, content) -> messageID
+
+https://excalidraw.com/#room=eec6f730bf6e7382cb28,LRB_x98TYNrdKDkM2a0k5g
+
+-----------------
+In this interview, we'll test your software design skills with an open-ended problem. We'll collaborate using what ever document editor you're comfortable with: Notion, Google Docs, or a plaintext file.
+
+Some people find it useful to draw architecture diagrams in this exercise. Since we'll be having this discussion remotely, you can use [Google Drawings](http://docs.google.com/drawings) or [Whimsical](https://whimsical.com/), but please do whatever you're most comfortable with (we're evaluating your software design knowledge here, not your familiarity with tools).
